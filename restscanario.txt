@@ -1,0 +1,112 @@
+Feature: Test Eligibility criteria flow on CWS 
+
+Scanario: EP eligible feature enable if meets EP criteria
+
+Given
+    EP business criteria - $1000 purchase, Mc code - 211,Mc name - Apple
+    user is on cws site
+When 
+     purchased made of  $1000 product , with mc code - 211 and mc name - Apple 
+     And
+      purchased made of  $1200 product , with mc code - 211 and mc name - Apple
+
+     
+Then
+     success Response 201 shown 
+     And response should not be null and empty
+    And following response parameter shown
+      |related  |
+      |transactionid |
+      |status |
+    And transactionId 1001,1002 status should shown as EP eligible
+ 
+Scanerio: Boundry value condition for purchase amount
+
+Given
+    EP business criteria - $1000 purchase, Mc code - 211,Mc name - Apple
+    user is on cws site
+When 
+     purchased made of  $999 product , with mc code - 211 and mc name - Apple 
+     And
+      purchased made of  $1001 product , with mc code - 211 and mc name - Apple
+
+     
+Then
+     success Response 201 shown 
+     And response should not be null and empty
+    And following response parameter shown
+      |related  |
+      |transactionid |
+      |status |
+    And status should be EP eligible
+
+Scenerio : EP eligible doesn't shown if doesn't meet any one criteria (for exmaple - mccode/mcname)
+   Given 
+         EP rule - $2000,mccode-204,mcname-Samsung
+         user is on cws site
+   When
+        Purchased of amout $2000 , mccode-201,mcname-mcdonald is made
+        And
+        Purchased of amout $2000,mccode-201,mcname-mcdonald is made
+   then
+       success Response 201 shown 
+       And response should not be null and empty
+       And following response parameter shown
+      |related  |
+      |transactionid |
+      |status |
+   And status should be ok (not EP eligible)
+
+Scenerio : EP eligible doesn't shown cash option choosen
+   Given 
+         EP rule - $2000,mccode-204,mcname-Samsung
+         user is on cws site
+   When
+        User opted for cash option
+   then
+       success Response 201 shown 
+       And response should not be null and empty
+       And following response parameter shown
+      |related  |
+      |transactionid |
+      |status |
+   And status should be ok (not EP eligible)
+
+all above scenario applicable for Mobile app test as well
+
+Feature - EP Enrollement flow
+
+Scnerio : Offer made availble to user once opted for EP enrollement
+
+Given 
+      user is able to see EP enroll feature on screen
+When
+      user opted for EP enrollment
+Then
+      Different offers including <offerperiod><APR> shown
+        |offerperiod | APR |
+        |6 month     | 2   |
+        |12 month    |  2  |
+
+
+Scenerio outline : User should able to select offer ans status,summary shown     
+
+Given 
+      user able to see different offers <offerperiod><APR>
+When
+     Any one offer selected by user
+Then
+      Enrollment <status> shown  
+Example:   
+        |offerperiod | APR | status  |
+        |6 month     | 2   | Pending |
+        |12 month    |  2  | Pending | 
+
+
+
+        
+       
+         
+  
+ 
+       
