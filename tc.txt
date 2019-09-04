@@ -1,0 +1,100 @@
+Regression 
+findByaccountlocalstore
+
+Compare response  for service in legency server (qa01) and (qa02) production server with different value for below parameter
+    - request type - by statment,date range,
+Compare response fields value with related DB table data
+
+Functional checks - findaccountBylocalstore
+
+Response Fields and value should be identical in soap and rest reponse.
+
+REST request param mvd as false
+
+RequestType param enum checks -
+- Test that response in SOAP and REST service is same request type - by statment, 
+- Test that response in SOAP and REST service is same request type - by date range
+- Test that    
+
+Maxrec param
+  - Test that SOAP and REST response contain records as per maxparam define
+
+Timeout 
+   - Test with different timeout parameter 
+         timeout as 500 for 100 records , timeout as 2000 more than 100 records.
+
+Check related with DB Data conditioning 
+ 
+    Test with accountID status as sold/stolen,frozen,traded
+    Test with accountID belongs to different partner along with multiple cpc
+    Test with accountID transaction record contain different transType
+    
+Negative Functional Checks
+
+  Test by passing invalid accountID,requesttype
+  Test by passing empty accountID and null as accountID
+  Test by passing empty request status and null as request status
+  Test with maxrecords in minus number
+
+Authorization
+  - Verify result if invalid clientid 
+  - Check failure if invalid password given
+  - Checks failure if header(header name) value is wrong / empty /null
+   - Checks failure if header(header name) value is wrong /empty/null
+
+---------------------------------------------------------------
+
+Functional checks - findByaccoutID
+ 
+Regression -
+Compare response  for service in legency server (qa01) and (qa02) production server with different value for below parameter
+    - request type - by statment,date range,
+Compare response fields value with related DB table data.
+
+with this service post transaction in tsys and checks if listed in SOAP response, DB, rest response with proper data.
+ 
+
+Response Fields and value should be identical in soap and rest reponse.
+
+REST request param mvd as true
+
+RequestType param enum checks -
+- Test that response in SOAP and REST service is same request type - by statment, 
+- Test that response in SOAP and REST service is same request type - by date range
+- Test that response in SOAP and REST service same for dispute type as false/true 
+
+Maxrec param
+  - Test that SOAP and REST response contain records as per maxparam define
+
+Timeout 
+   - Test with different timeout parameter 
+         timeout as 500 for 100 records , timeout as 2000 more than 100 records.
+
+Check related with DB Data conditioning 
+ 
+    Test with accountID status as sold/stolen,frozen,traded
+    Test with accountID belongs to different partner along with multiple cpc
+    Test with accountID transaction record contain different transType
+    
+Negative Functional Checks
+
+  Test by passing invalid accountID,requesttype
+  Test by passing empty accountID and null as accountID
+  Test by passing empty request status and null as request status
+  Test with maxrecords in minus number
+
+Authorization
+  - Verify result if invalid clientid 
+  - Check failure if invalid password given
+  - Checks failure if header(header name) value is wrong / empty /null
+   - Checks failure if header(header name) value is wrong /empty/null
+
+
+  
+
+     
+
+
+
+
+
